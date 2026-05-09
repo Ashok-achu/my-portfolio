@@ -800,78 +800,231 @@ function Projects() {
   );
 }
 
-function ProjectCard({ title, desc, tags, live, github, gradient, icon }) {
+function ProjectCard({
+  title,
+  desc,
+  tags,
+  live,
+  github,
+  gradient,
+  icon,
+}) {
   const [hov, setHov] = useState(false);
+
   return (
-    <div className="rv" style={{
-      background: "var(--card)",
-      border: `1px solid ${hov ? "rgba(123,111,255,0.35)" : "var(--border)"}`,
-      borderRadius: 22, overflow: "hidden", display: "flex", flexDirection: "column",
-      transition: "transform 0.35s var(--ease), box-shadow 0.35s, border-color 0.25s",
-      transform: hov ? "translateY(-8px)" : "none",
-      boxShadow: hov ? "0 24px 60px rgba(0,0,0,0.4)" : "0 4px 20px rgba(0,0,0,0.2)",
-    }}
-    onMouseEnter={() => setHov(true)}
-    onMouseLeave={() => setHov(false)}
+    <div
+      className="rv"
+      style={{
+        background: "var(--card)",
+        border: `1px solid ${
+          hov
+            ? "rgba(123,111,255,0.35)"
+            : "var(--border)"
+        }`,
+        borderRadius: 22,
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        transition:
+          "transform 0.35s var(--ease), box-shadow 0.35s, border-color 0.25s",
+        transform: hov ? "translateY(-8px)" : "none",
+        boxShadow: hov
+          ? "0 24px 60px rgba(0,0,0,0.4)"
+          : "0 4px 20px rgba(0,0,0,0.2)",
+      }}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
     >
       {/* Gradient banner */}
-      <div style={{
-        height: 150, background: gradient,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: 54, position: "relative", overflow: "hidden",
-        transition: "filter 0.35s",
-        filter: hov ? "brightness(1.15) saturate(1.2)" : "brightness(0.85)",
-      }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%)",
-        }} />
-        <span style={{ position: "relative", zIndex: 1, filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.35))", transition: "transform 0.35s", transform: hov ? "scale(1.15)" : "scale(1)" }}>{icon}</span>
+      <div
+        style={{
+          height: 150,
+          background: gradient,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 54,
+          position: "relative",
+          overflow: "hidden",
+          transition: "filter 0.35s",
+          filter: hov
+            ? "brightness(1.15) saturate(1.2)"
+            : "brightness(0.85)",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%)",
+          }}
+        />
+
+        <span
+          style={{
+            position: "relative",
+            zIndex: 1,
+            filter:
+              "drop-shadow(0 4px 16px rgba(0,0,0,0.35))",
+            transition: "transform 0.35s",
+            transform: hov
+              ? "scale(1.15)"
+              : "scale(1)",
+          }}
+        >
+          {icon}
+        </span>
       </div>
 
-      <div style={{ padding: "24px 26px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
-        <h3 style={{ fontFamily: "var(--fd)", fontWeight: 700, fontSize: 18, marginBottom: 10, color: "var(--text)", letterSpacing: "-0.3px" }}>{title}</h3>
-        <p style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.75, flex: 1, marginBottom: 20 }}>{desc}</p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 24 }}>
-          {tags.map(t => (
-            <span key={t} style={{
-              fontSize: 11, padding: "4px 12px", borderRadius: 999,
-              background: "rgba(123,111,255,0.1)", color: "var(--a1)",
-              border: "1px solid rgba(123,111,255,0.22)",
-              fontFamily: "var(--fd)", fontWeight: 600, letterSpacing: "0.03em",
-            }}>{t}</span>
+      {/* Content */}
+      <div
+        style={{
+          padding: "24px 26px 28px",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h3
+          style={{
+            fontFamily: "var(--fd)",
+            fontWeight: 700,
+            fontSize: 18,
+            marginBottom: 10,
+            color: "var(--text)",
+            letterSpacing: "-0.3px",
+          }}
+        >
+          {title}
+        </h3>
+
+        <p
+          style={{
+            fontSize: 14,
+            color: "var(--text2)",
+            lineHeight: 1.75,
+            flex: 1,
+            marginBottom: 20,
+          }}
+        >
+          {desc}
+        </p>
+
+        {/* Tags */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 6,
+            marginBottom: 24,
+          }}
+        >
+          {tags.map((t) => (
+            <span
+              key={t}
+              style={{
+                fontSize: 11,
+                padding: "4px 12px",
+                borderRadius: 999,
+                background:
+                  "rgba(123,111,255,0.1)",
+                color: "var(--a1)",
+                border:
+                  "1px solid rgba(123,111,255,0.22)",
+                fontFamily: "var(--fd)",
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+              }}
+            >
+              {t}
+            </span>
           ))}
         </div>
+
+        {/* Buttons */}
         <div style={{ display: "flex", gap: 10 }}>
-          <a
-  href={live}
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{
-            flex: 1, textAlign: "center", padding: "11px",
-            background: "linear-gradient(135deg, var(--a1), var(--a2))",
-            color: "#fff", borderRadius: 12, textDecoration: "none",
-            fontSize: 12, fontWeight: 700, fontFamily: "var(--fd)",
-            boxShadow: "0 4px 16px rgba(123,111,255,0.3)",
-            transition: "opacity 0.2s, box-shadow 0.2s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.opacity="0.85"; e.currentTarget.style.boxShadow="0 6px 24px rgba(123,111,255,0.5)"; }}
-          onMouseLeave={e => { e.currentTarget.style.opacity="1"; e.currentTarget.style.boxShadow="0 4px 16px rgba(123,111,255,0.3)"; }}
-          >Live Demo ↗</a>
-          <a
-  href={github}
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{
-            flex: 1, textAlign: "center", padding: "11px",
-            background: "transparent", color: "var(--text2)",
-            border: "1px solid var(--border2)", borderRadius: 12,
-            textDecoration: "none", fontSize: 12, fontWeight: 700, fontFamily: "var(--fd)",
-            transition: "border-color 0.2s, color 0.2s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor="var(--a1)"; e.currentTarget.style.color="var(--text)"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor="var(--border2)"; e.currentTarget.style.color="var(--text2)"; }}
-          >⌥ GitHub</a>
+
+          {live && (
+            <a
+              href={live}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                flex: 1,
+                textAlign: "center",
+                padding: "11px",
+                background:
+                  "linear-gradient(135deg, var(--a1), var(--a2))",
+                color: "#fff",
+                borderRadius: 12,
+                textDecoration: "none",
+                fontSize: 12,
+                fontWeight: 700,
+                fontFamily: "var(--fd)",
+                boxShadow:
+                  "0 4px 16px rgba(123,111,255,0.3)",
+                transition:
+                  "opacity 0.2s, box-shadow 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity =
+                  "0.85";
+
+                e.currentTarget.style.boxShadow =
+                  "0 6px 24px rgba(123,111,255,0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "1";
+
+                e.currentTarget.style.boxShadow =
+                  "0 4px 16px rgba(123,111,255,0.3)";
+              }}
+            >
+              Live Demo ↗
+            </a>
+          )}
+
+          {github && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                flex: 1,
+                textAlign: "center",
+                padding: "11px",
+                background: "transparent",
+                color: "var(--text2)",
+                border:
+                  "1px solid var(--border2)",
+                borderRadius: 12,
+                textDecoration: "none",
+                fontSize: 12,
+                fontWeight: 700,
+                fontFamily: "var(--fd)",
+                transition:
+                  "border-color 0.2s, color 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor =
+                  "var(--a1)";
+
+                e.currentTarget.style.color =
+                  "var(--text)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor =
+                  "var(--border2)";
+
+                e.currentTarget.style.color =
+                  "var(--text2)";
+              }}
+            >
+              ⌥ GitHub
+            </a>
+          )}
+
         </div>
       </div>
     </div>
